@@ -1,7 +1,8 @@
-# Use the official PHP image with Apache
-# FROM docker.io/php:8.1-apache
-FROM docker.io/php:7.2-apache
+FROM docker.io/php:8.1-apache
+# FROM docker.io/php:7.2-apache
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql
-# Copy the website files to the container
-# COPY . /var/www/html/
+RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 755 /var/www/html/
+
+COPY ./apache2.conf /etc/apache2/apache2.conf
